@@ -3,6 +3,7 @@ console.log("running app.js");
 var express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
+const path = require('path')
 var url = require('url');
 var cookieParser = require('cookie-parser');
 var fs = require('fs');
@@ -68,8 +69,7 @@ fs.writeFile('userdata.json',JSON.stringify(resetdata),function(err){if(err)thro
 fs.writeFile('metadata.json',JSON.stringify(resetmeta),function(err){if(err)throw err; console.log('reset metadata.json')});
 */
 
-app.use(express.static("public"));
-
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/login',function(req,res){
     let a = req.cookies['userData'];
