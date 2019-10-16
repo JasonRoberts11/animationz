@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var fs = require('fs');
 
 const start = Date.now(),
-    protocol = process.env.PROTOCOL || 'https',
+    protocol = process.env.PROTOCOL || 'http',
     port = process.env.PORT || '3000',
     host = process.env.HOST || 'localhost';
 
@@ -50,7 +50,7 @@ if ( protocol === 'https' ) {
 	server = require( 'https' ).createServer( options,app);
     
 } else {
-    console.log("http");
+    console.log("http " + port);
     server = require( 'http' ).createServer( app );
 }
 console.log("Hey everyone");
