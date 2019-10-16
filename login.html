@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+     <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet">
+
+    </head>
+<body>
+<div id="navbar"></div>
+<h1>Looks like you aren't logged on yet...</h1>
+    <div class="centerbox">
+        <strong><h3>Please Log In</h3></strong>
+        <p>Username:<input id="inusn" type="text"><br>
+Password:<input id="inpwd" type="password"></p>
+        <p class="note" id="display"></p>
+
+        <button id="submit">Submit</button>
+
+        </div>
+<script>
+      const postToTest = (jeson) => {
+        console.log(jeson);
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", '/loginattempt', true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.onload = () => {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+           if(xhr.responseText=="1"){
+               window.location.href="/";
+           }else{
+               display.innerHTML="Wrong Username or Password";
+           }
+          }
+        };
+        xhr.send(JSON.stringify(jeson));
+      }
+      document.getElementById("submit").onclick = function(){
+          var una = document.getElementById("inusn").value;
+          var pwd = document.getElementById("inpwd").value;
+          var et = {username: una, password: pwd};
+          postToTest(et);
+      }
+      var usernum;
+      const getUsers = () => {
+        console.log("getting the users");
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", '/getamountusers', true);
+        xhr.setRequestHeader("Content-type", "text/plain");
+
+        xhr.onload = () => {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            usernum = xhr.responseText;
+            document.getElementById("display").innerHTML = usernum;
+              
+          }
+        };
+        xhr.send();
+      }
+      
+      window.onload = function(){getUsers()};
+</script>
+<script type="text/javascript" src="navbar.js"></script>
+
+
+</body>
+</html>

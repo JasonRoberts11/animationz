@@ -1,0 +1,97 @@
+var ALLBLOCKS= {
+otb:{
+	name:"On Test Block",
+    shape:0,
+    color:2,
+    in_event:true,
+    out_event:true,
+    value:false,
+    layout:0,  
+    contents:[
+        {
+            is_text:true,
+            text:"hi"
+        },
+        {
+            is_text:false,
+            label:"x",
+            type:0
+        },
+        {
+            is_text:false,
+            label:"yes",
+            type:1
+        }
+        ,
+        {
+            is_text:false,
+            label:"no",
+            type:2
+        }
+    ],
+    output:[
+        {
+            label:"hi",
+            type:0
+        },
+        {
+            label:"hello",
+            type:1
+        },
+        {
+            label:"position",
+            type:2
+        }
+    ]
+},
+pnt:{
+	name:"Print",
+    shape:0,
+    color:3,
+    in_event:true,
+    out_event:true,
+    value:false,
+    layout:0,  
+    contents:[
+        {
+            is_text:false,
+            label:"text",
+            type:0
+        }
+    ],
+    output:[
+    ]
+},
+txt:{
+	txt:true,
+	name:"Text",
+    shape:1,
+    color:7,
+    in_event:false,
+    out_event:false,
+    value:"Hello World",
+    layout:0,  
+    contents:[
+    ],
+    output:[
+		{
+			is_text:false,
+            label:"text",
+			type:0
+		}
+    ]
+},
+start:{
+	name:"On Start",
+    shape:0,
+    color:1,
+    in_event:false,
+    out_event:true,
+    value:false,
+    layout:0,  
+    contents:[
+    ],
+    output:[
+    ]
+}
+}

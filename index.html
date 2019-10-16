@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet">
+
+    </head>
+<body>
+<div id="navbar"></div>
+<h1>Index</h1>
+<div class="flexbox" id="userhere">
+    <span class="centerbox" id="imgbut"><image src ="https://ruwix.com/pics/square-1/not-square-middle-layer.jpg" class="logo" id="imglogo"></image></span>
+<span class="sidebox" style="width:75%" >
+    
+    <h2 id="nname">Username</h2>
+    <p>Slogan: <span id="nslogan"></span></p>
+</span>
+    <div><button id = "logout">Logout</button></div>
+    
+</div>
+
+    
+<div class="flexbox">
+<span class="sidebox autowid" id="useredit">
+    
+    <h3>UserEdit</h3>
+    <p>Slogan:<br><textarea id="sloganarea"> </textarea></p>
+    <p>Image URL:<br><textarea id="imgurlarea"> </textarea></p>
+    <div id="display" class="note"></div>
+    <button id="saveuser">Save</button>
+    
+</span>
+        <span class="sidebox autowid">
+    
+    <h3>Rando box</h3>
+   
+</span>
+        </div>
+<div id="divlogout">
+    <a href="/login"><button>Login</button></a>
+    <a href="/signup"><button>Signup</button></a>
+</div>
+<script>
+    var mainuser;
+    var mainpass;
+    var mainslog;
+      var logoutbut = document.getElementById("logout");
+    logoutbut.onclick = function(){
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", '/logout', true);
+        xhr.onload = () =>{
+        window.location.href="/login";                  
+        }
+        xhr.send();
+        
+    }
+    var suser = document.getElementById("saveuser");
+    var divlogout = document.getElementById("divlogout");
+var uedit = document.getElementById("useredit");
+
+    var uhere = document.getElementById("userhere");
+var display = document.getElementById('display');
+      fetch('/userslogan').then(function(response){
+          response.text().then(function(text){
+              //document.getElementById("display").innerHTML = //text;
+              let jse = JSON.parse(text);
+              console.log(jse)
+              if(jse.ver){
+                  uedit.style.display="block";
+                  logoutbut.style.display="block";
+                  divlogout.style.display="none";
+                  document.getElementById("nslogan").textContent=jse.alldata.slogan;
+                  document.getElementById("nname").textContent=jse.data.username;
+                  display.innerHTML="";
+                  document.getElementById("sloganarea").value=jse.alldata.slogan;
+                  
+                 if(jse.alldata.imgurl==void(0)){
+                        jse.alldata.imgurl="images/face_0.png";
+                    } document.getElementById("imgurlarea").value=jse.alldata.imgurl;
+                  document.getElementById('imglogo').src=jse.alldata.imgurl;
+                  
+                  mainuser=jse.data.username;
+                  mainpass=jse.data.password;
+              }else{
+                  uhere.style.display="none";
+                  uedit.style.display="none";
+                  logoutbut.style.display="none";
+                  divlogout.style.display="block";
+                   display.innerHTML="HI Random Person";
+              }
+          });
+      });
+    var imgbut = document.getElementById('imgbut');
+    
+      suser.onclick= function(){
+          console.log("trying to save");
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", '/saveusr', true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.onload = () => {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+              let h =xhr.responseText;
+                 
+                  display.innerHTML=h;
+          }
+        };
+          let imgurl=document.getElementById("imgurlarea").value;
+          document.getElementById('imglogo').src=imgurl;
+          let sloga =  document.getElementById("sloganarea").value;
+        let jeson = {username: mainuser, password: mainpass, newslo: sloga, imgurl: imgurl};
+          mainslog=sloga;
+        xhr.send(JSON.stringify(jeson));
+          document.getElementById("nslogan").textContent = sloga;
+      }
+</script>
+<script src="navbar.js"></script>
+</body>
+</html>

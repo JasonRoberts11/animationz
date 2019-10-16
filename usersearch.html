@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet">
+
+    </head>
+<body>
+<div id="navbar"></div>
+<h1>User Search</h1>
+<div class="userlist" id="userlist">
+    
+<div class="flexbox" id="testuser">
+    <span class="centerbox"><image src ="https://ruwix.com/pics/square-1/not-square-middle-layer.jpg" class="logo"></image></span>
+<span class="sidebox" style="width:75%" >
+    
+    <h2>Username</h2>
+    <p>Slogan: <span></span></p>
+</span>
+</div>
+
+    </div>
+    
+<script>
+    var udiv = document.getElementById("userlist");
+    
+      fetch('/userlist').then(function(response){
+          response.text().then(function(text){
+              //document.getElementById("display").innerHTML = //text;
+              let jse = JSON.parse(text);
+              console.log(jse)
+              udiv.innerHTML="";
+              for(var i=0;i<jse.users.length;i++){
+                  let obj = jse.users[i];
+                  if(obj.imgurl==void(0)){
+                      obj.imgurl="images/face_0.png";
+                  }
+                  let fbox = document.createElement("div");
+                  fbox.classList.add("flexbox");
+                  udiv.appendChild(fbox);
+                  let ispan= document.createElement("span");
+                  ispan.classList.add("centerbox");
+                  fbox.appendChild(ispan);
+                  let imge = document.createElement("img");
+                  imge.src = obj.imgurl;
+                  imge.classList.add("logo");
+                  ispan.appendChild(imge);
+                  let ispan2 = document.createElement("span")
+                  ispan2.classList.add("sidebox");
+                  ispan2.style.width="75%";
+                  fbox.appendChild(ispan2);
+                  let hname = document.createElement("h2");
+                  hname.textContent=obj.name;
+                  ispan2.appendChild(hname);
+                  let hslo = document.createElement("p");
+                  hslo.textContent=obj.slogan;
+                  ispan2.appendChild(hslo);
+
+              }
+              
+                  
+          });
+      });
+    
+</script>
+<script src="navbar.js"></script>
+</body>
+</html>

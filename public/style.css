@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+    font-family: 'Abel', sans-serif;
+
+}
+button{
+    font-size:1.2em;
+    font-family: 'Abel', sans-serif;
+    background: #333333;
+    color:#efefef;
+    border: none;
+    margin:3px;
+}
+.centerbox{
+    padding:3px;
+    text-align: center;
+    background: #f1f1f1;
+}
+.sidebox{
+    padding:3px;
+    text-align: left;
+    padding-left: 10px;
+    background: #f1f1f1;
+
+}
+.userlist{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.logo{
+    width:100px;
+    height:100px;
+}
+.flexbox{
+    text-align: center;
+  margin: 0;
+  padding: 0;
+    display: flex;
+      flex-wrap: wrap;
+  justify-content: center;
+overflow-y:auto;
+    //border: 1px solid blue;
+}
+.autowid{
+    width: auto;
+}
+.right{
+    text-align: right;
+}
+.note{
+    font-size:0.9em;
+    color:#565656;
+}
+.bord{
+    border: #343434 3px solid;
+}
+
+button:hover{
+    background: #555555;
+    color:#efefef;
+    border: none;
+}
+button:active{
+    background: #afafaf;
+    color:#333333;
+    border: none;
+}
+
+h1 {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+#navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-size: 1.3em;
+}
+
+#navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}

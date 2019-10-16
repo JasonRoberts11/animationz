@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+      <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet">
+
+    </head>
+<body>
+<div id="navbar"></div>
+<h1>So glad you are interested in this!!!</h1>
+    <div class="centerbox">
+<h3>Create a New Account</h3>
+<p>Username:<input id="inusn" type="text"></p>
+<p>Password:<input id="inpwd" type="password"></p>
+<p>Confirm Password:<input id="inpwdc" type="password"></p>
+<p class="note" id="display"></p>
+
+        <button id="submit">Submit</button>
+        
+        </div>
+<script>
+      const postToTest = (jeson) => {
+        console.log(jeson);
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", '/signupattempt', true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.onload = () => {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            if(xhr.responseText=="1"){
+                window.location.href="/";
+            }else{
+                document.getElementById("display").innerHTML = "Username Already Exists";
+            }
+          }
+        };
+        xhr.send(JSON.stringify(jeson));
+      }
+      document.getElementById("submit").onclick = function(){
+          
+          var una = document.getElementById("inusn").value;
+          var pwd = document.getElementById("inpwd").value;
+          var pwdc = document.getElementById("inpwdc").value;
+          var et = {username: una, password: pwd};
+          if(una.length>2){
+            if(pwd.length>7){
+              if(pwd==pwdc){
+                    postToTest(et);
+            }else{
+              tellu("passwords dont match")
+                }
+            }else{
+              tellu("password too short")
+          }}else{
+              tellu("username too short")
+          }
+          
+      }
+      function tellu(str){
+          document.getElementById("display").innerHTML = str;
+      }
+      var usernum;
+      const getUsers = () => {
+        console.log("getting the users");
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", '/getamountusers', true);
+        xhr.setRequestHeader("Content-type", "text/plain");
+
+        xhr.onload = () => {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            usernum = xhr.responseText;
+            tellu("There are "+ usernum+" accounts...");
+              
+          }
+        };
+        xhr.send();
+      }
+      
+      window.onload = function(){getUsers()};
+</script>
+<script type="text/javascript" src="navbar.js"></script>
+
+
+</body>
+</html>
