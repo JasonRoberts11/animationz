@@ -1,4 +1,5 @@
 //const openssl = require('openssl');
+console.log("running app.js");
 var express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
