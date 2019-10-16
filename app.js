@@ -90,6 +90,7 @@ app.get('/signup',function(req,res){
     }    
 });
 app.get('/', function (req, res) {
+	console.log("you little liar")
     res.sendFile('index.html' , { root : __dirname});
 });
 app.get('/usersearch', function (req, res) {
