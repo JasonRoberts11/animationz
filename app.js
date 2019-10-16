@@ -10,7 +10,7 @@ var fs = require('fs');
 
 const start = Date.now(),
     protocol = process.env.PROTOCOL || 'http',
-    port = process.env.PORT || '3000',
+    PORT = process.env.PORT || '3000',
     host = process.env.HOST || 'localhost';
 
 
@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
-
+/*
 if ( protocol === 'https' ) {
     console.log("https");
 	const { execSync } = require( 'child_process' );
@@ -61,7 +61,7 @@ server.listen( { port, host }, function() {
 
     // Tell the parent process that Server has booted.
     //sendBootStatus( 'ready' );
-} );
+} );*/
 //RESETS THE USERDATA:
 /*var resetdata = {users:[]};
 var resetmeta = {numofusers: 0};
@@ -69,7 +69,10 @@ fs.writeFile('userdata.json',JSON.stringify(resetdata),function(err){if(err)thro
 fs.writeFile('metadata.json',JSON.stringify(resetmeta),function(err){if(err)throw err; console.log('reset metadata.json')});
 */
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')))
+.set('views', path.join(__dirname, 'views'))
+.set('view engine', 'ejs')
+.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 app.get('/login',function(req,res){
     let a = req.cookies['userData'];
