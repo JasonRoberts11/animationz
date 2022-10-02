@@ -7,7 +7,7 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
-    "openssl": "^1.1.0",
+    "openssl": "^2.0.0",
     "openssl-nodejs": "^1.0.5"
   },
   "devDependencies": {},
